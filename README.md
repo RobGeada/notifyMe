@@ -6,4 +6,4 @@ import notifyMe as nm
 notifyMe.notifyMe("you@email","Your message goes here")
 ```
 
-The module stores your email password in plaintext, so for the *love of god* don't ever commit this without checking to make sure you've erased it and never use this for anything actually serious.
+The module stores your email password in plaintext, so for the *love of god* don't ever commit this without checking to make sure you've erased your password. Really, just never use this for anything actually serious.
