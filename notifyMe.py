@@ -4,7 +4,7 @@ import random
 from email.mime.text import MIMEText
 
 #I know I know it's plaintext what do you want from me
-emailPass = "put email password here"
+emailPass = raw_input("Email password: ")
 
 #========Generate string with current tim======================
 def timeStr():
