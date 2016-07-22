@@ -42,7 +42,7 @@ def randGreeting():
 
 #=======Print out spacer line=================================
 def spacer():
-    return "\n=======================================================\n\n"
+    return "\n==============================\n\n"
 
 #========Generate random sign off===============================
 def randSignOff():
