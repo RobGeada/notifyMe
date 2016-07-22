@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 #I know I know it's plaintext what do you want from me
 emailPass = raw_input("Email password: ")
 
-#========Generate string with current tim======================
+#========Generate string with current time======================
 def timeStr():
     currTime = datetime.datetime.now().time()
     if currTime.hour > 12:
