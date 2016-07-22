@@ -1,10 +1,23 @@
 import smtplib
 import datetime
 import random
+import getpass
 from email.mime.text import MIMEText
 
-#I know I know it's plaintext what do you want from me
-emailPass = raw_input("Email password: ")
+#========Get user credentials================================
+server =smtplib.SMTP('smtp.gmail.com',587)
+server.ehlo()
+server.starttls()
+server.ehlo()
+emailUser =           raw_input("Enter email address to enable notifyMe: ")
+while 1:
+    emailPass = getpass.getpass("                              Password: ")
+    try:
+        server.login(emailUser,emailPass)
+        break
+    except:
+        print "Invalid password, try again!"
+server.close()
 
 #========Generate string with current time======================
 def timeStr():
@@ -24,7 +37,7 @@ def timeStr():
 #========Generate random greeting===============================
 def randGreeting():
     seed = random.randint(0,5)
-    greetings = ["Hi!","Hello friend!","'What's up dude!","Hear thee, hear thee!","Hey there!","Psst!"]
+    greetings = ["Hi!","Hello friend!","What's up dude!","Hear thee, hear thee!","Hey there!","Psst!"]
     return greetings[seed]
 
 #=======Print out spacer line=================================
@@ -38,21 +51,21 @@ def randSignOff():
     return "\n" + spacer() + signoffs[seed] + "\n\nnotifyMe"
 
 #========Send email to self=====================================
-def notifyMe(me,msg):
+def notifyMe(msg):
     server =smtplib.SMTP('smtp.gmail.com',587)
     
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login(me,emailPass)
+    server.login(emailUser,emailPass)
 
     msgToSend = randGreeting() + timeStr() + spacer() + "\t" + msg + randSignOff()
     mimeMsg = MIMEText(msgToSend)
 
     mimeMsg['Subject'] = "Automated Reminder from notifyMe!"
-    mimeMsg['From'] = me
-    mimeMsg['To']   = me
+    mimeMsg['From'] = emailUser
+    mimeMsg['To']   = emailUser
 
-    server.sendmail(me, me, mimeMsg.as_string())
+    server.sendmail(emailUser, emailUser, mimeMsg.as_string())
     server.quit
 
